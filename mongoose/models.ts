@@ -1,60 +1,31 @@
 import mongoose from "mongoose"
-import dbConnect from "./dbConnect";
 
-export type T_UserSchema = {
-  name: string;
-  email: string;
-  password: string;
-  city?: string;
-  useState?: string;
-  country?: string;
-  occupation?: string;
-  phoneNumber?: string;
-  transaction?: any[]; // Adjust the type for transaction as needed
-  role: "user" | "admin" | "superadmin";
-  createdAt: Date;
-  updatedAt: Date;
+export type NoteSchema = {
+  title: string;
+  description: string;
 }
-const UserSchema = new mongoose.Schema<T_UserSchema>(
+const noteSchema = new mongoose.Schema<NoteSchema>(
   {
-    name: {
+    title: {
       type: String,
       require: true,
       min: 2,
-      max: 100,
+      max: 16,
     },
-    email: {
+    description: {
       type: String,
       require: true,
-      max: 50,
-      unique: true,
-    },
-    password: {
-      type: String,
-      require: true,
-      min: 5,
-    },
-    city: String,
-    useState: String,
-    country: String,
-    occupation: String,
-    phoneNumber: String,
-    transaction: Array,
-
-    role: {
-      type: String,
-      enum: ["user", "admin", "superadmin"],
-      default: "admin",
+      max: 255,
     },
   },
   { timestamps: true }
 );
 
-const UserModel = (mongoose.models && "User" in mongoose.models) 
-? mongoose.models.User as mongoose.Model<T_UserSchema> 
-: mongoose.model<T_UserSchema>("User", UserSchema, "users");
+const NoteModel = (mongoose.models && "Note" in mongoose.models) 
+? mongoose.models.Note as mongoose.Model<NoteSchema> 
+: mongoose.model<NoteSchema>("Note", noteSchema, "notes");
 
-export default UserModel
+export default NoteModel
 
 // export async function getUserById(id: string): Promise<T_UserSchema | null> {
 //   await dbConnect();
