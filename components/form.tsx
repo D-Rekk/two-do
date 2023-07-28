@@ -17,16 +17,25 @@ import {
 import { Input } from "@/components/ui/input"
 
 const formSchema = z.object({
-  username: z.string().min(2, {
-    message: "Username must be at least 2 characters.",
-  }),
-  description: z.string().refine(i => i.length <= 255, {
-    message: "Description can't be longer than 255 characters"
-  })
+  username: z.string()
+    .min(2, {
+      message: "Username must be at least 2 characters.",
+    })
+    .max(16,{
+      message: "Username must not surpass 16 characters.",
+    })
+    .regex(/^[a-zA-Z0-9]+$/, {
+      message: "Username can only contain alphanumeric characters.",
+    }),
+  description: z.string()
+    .refine(i => i.length <= 255, {
+      message: "Description can't be longer than 255 characters."
+    })
+
 })
 
-export function ProfileForm() {
-  // 1. Define your form.
+export const ProfileForm = () => {
+  //Form definition using schema
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -35,10 +44,7 @@ export function ProfileForm() {
     },
   })
 
-  // 2. Define a submit handler.
   function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
     console.log(values)
   }
 
@@ -70,9 +76,6 @@ export function ProfileForm() {
               <FormControl>
                 <Input placeholder="" {...field} />
               </FormControl>
-              {/* <FormDescription>
-                This is your public display name.
-              </FormDescription> */}
               <FormMessage className="absolute"/>
             </FormItem>
           )}
