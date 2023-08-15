@@ -1,4 +1,4 @@
-import { ProfileForm } from "@/components/form"
+import { ProfileForm } from "@/components/notes/form"
 
 export default function AddNote(){
   return (

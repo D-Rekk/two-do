@@ -3,6 +3,7 @@ import mongoose from "mongoose"
 export type NoteSchema = {
   title: string;
   description: string;
+  id?: string;
 }
 const noteSchema = new mongoose.Schema<NoteSchema>(
   {

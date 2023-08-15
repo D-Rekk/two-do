@@ -34,7 +34,12 @@ const formSchema = z.object({
 
 })
 
-export const ProfileForm = () => {
+type ProfileFormProps = {
+  closeModal?: () => void;
+};
+
+
+export const ProfileForm = ({ closeModal }: ProfileFormProps) => {
   //Form definition using schema
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -45,6 +50,7 @@ export const ProfileForm = () => {
   })
 
   function onSubmit(values: z.infer<typeof formSchema>) {
+    if (closeModal) closeModal();
     console.log(values)
   }
 
@@ -74,7 +80,7 @@ export const ProfileForm = () => {
             <FormItem>
               <FormLabel>Description</FormLabel>
               <FormControl>
-                <Input placeholder="" {...field} />
+                <Input autoComplete="off" placeholder="" {...field} />
               </FormControl>
               <FormMessage className="absolute"/>
             </FormItem>
