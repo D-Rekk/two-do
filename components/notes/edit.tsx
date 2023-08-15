@@ -1,15 +1,12 @@
-import { Trash2, Pencil } from "lucide-react"
-import { Button } from "../ui/button"
+import { NoteSchema } from "@/mongoose/models"
+import { CancelNote } from "./cancelNote"
+import { EditNote } from "./editNoteDialog"
 
-export default function Edit(){
+export default function Edit({title, description, id}: NoteSchema){
   return (
     <div className="flex gap-2">
-      <Button size="icon">
-        <Pencil/>
-      </Button>
-      <Button size="icon" className="text-red-500">
-        <Trash2 />
-      </Button>
+      <EditNote title={title} description={description} id={id}/>
+      <CancelNote id={id}/>
     </div>
   )
   
