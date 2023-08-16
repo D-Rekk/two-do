@@ -12,11 +12,26 @@ import {
 } from "@/components/ui/alert-dialog"
 import { Button } from "@/components/ui/button"
 import { Trash2 } from "lucide-react"
+import { useRouter } from "next/navigation"
+
 
 type Props = {
   id?: string
 }
 export function CancelNote({id} : Props) {
+  const router = useRouter()
+  const handleSubmit= () => {
+    try{
+      fetch(`http://localhost:3000/api/notes/${id}`, {
+        method: "DELETE",
+        headers: {'Content-Type': 'application/json'}
+      })
+      router.refresh()
+    } catch (err){
+      throw err
+    }
+
+  }
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
@@ -37,7 +52,7 @@ export function CancelNote({id} : Props) {
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <AlertDialogAction>Continue</AlertDialogAction>
+          <AlertDialogAction onClick={handleSubmit} className="button-variant-primary bg-red-500">Delete</AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>

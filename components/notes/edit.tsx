@@ -1,6 +1,6 @@
 import { NoteSchema } from "@/mongoose/models"
-import { CancelNote } from "./cancelNote"
-import { EditNote } from "./editNoteDialog"
+import { CancelNote } from "./buttons/cancelNoteDialog"
+import { EditNote } from "./buttons/editNoteDialog"
 
 export default function Edit({title, description, id}: NoteSchema){
   return (

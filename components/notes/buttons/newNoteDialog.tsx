@@ -9,41 +9,12 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
-import { zodResolver } from "@hookform/resolvers/zod"
 import { useState } from "react"
-import { Form, useForm } from "react-hook-form"
-import { z } from "zod"
-import { FormField, FormItem, FormLabel, FormControl, FormMessage } from "../ui/form"
-import { Input } from "../ui/input"
-import { ProfileForm } from "./form"
 
-const formSchema = z.object({
-  username: z.string()
-    .min(2, {
-      message: "Username must be at least 2 characters.",
-    })
-    .max(16,{
-      message: "Username must not surpass 16 characters.",
-    })
-    .regex(/^[a-zA-Z0-9]+$/, {
-      message: "Username can only contain alphanumeric characters.",
-    }),
-  description: z.string()
-    .refine(i => i.length <= 255, {
-      message: "Description can't be longer than 255 characters."
-    })
+import { ProfileForm } from "../form"
 
-})
 export function NewNote() {
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      username: "",
-      description:""
-    },
-  })
   
-
   function closeModal() {
     setOpen(false);
   }

@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/dialog"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { useRouter } from "next/navigation"
 import { useRef } from "react"
 
 type Props = {
@@ -27,13 +28,31 @@ export const EditNote: React.FC<Props> = ({
   title = "Title value",
   description = "Note value"
 }) => {
+  const router = useRouter()
   const ref1 = useRef<HTMLInputElement>(null)
   const ref2 = useRef<HTMLInputElement>(null)
-  function handleSubmit(){
-    console.log(ref1.current?.value)
-    console.log(ref2.current?.value)
-    console.log("This is id: "+ id)
-    // fetch("http://localhost:3000/api/notes", {method: "put"})
+  async function handleSubmit(){
+    const value ={
+      title: ref1.current?.value,
+      description: ref2.current?.value
+    };
+    try {
+      const response = await fetch(`http://localhost:3000/api/notes/${id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({value}),
+      });
+      
+      const responseData = await response.json();
+      console.log('PUT request success:', responseData);
+      router.refresh();
+    } catch (err) {
+      console.error('Error sending PUT request:', err);
+      throw err;
+    }
+    console.log(value);
   }
   return (
     <Dialog>

@@ -15,17 +15,15 @@ import {
   FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
+import { useRouter } from "next/navigation"
 
 const formSchema = z.object({
-  username: z.string()
+  title: z.string()
     .min(2, {
-      message: "Username must be at least 2 characters.",
+      message: "Title must be at least 2 characters.",
     })
     .max(16,{
-      message: "Username must not surpass 16 characters.",
-    })
-    .regex(/^[a-zA-Z0-9]+$/, {
-      message: "Username can only contain alphanumeric characters.",
+      message: "Title must not surpass 16 characters.",
     }),
   description: z.string()
     .refine(i => i.length <= 255, {
@@ -44,14 +42,30 @@ export const ProfileForm = ({ closeModal }: ProfileFormProps) => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      username: "",
+      title: "",
       description:""
     },
   })
-
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  const router = useRouter();
+  async function onSubmit(values: z.infer<typeof formSchema>) {
     if (closeModal) closeModal();
     console.log(values)
+    try {
+      const response = await fetch("http://localhost:3000/api/notes", {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(values),
+      });
+      
+      const responseData = await response.json();
+      console.log('POST request success:', responseData);
+      router.refresh();
+    } catch (err) {
+      console.error('Error sending POST request:', err);
+      throw err;
+    }
   }
 
   return (
@@ -59,10 +73,10 @@ export const ProfileForm = ({ closeModal }: ProfileFormProps) => {
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
         <FormField
           control={form.control}
-          name="username"
+          name="title"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Username</FormLabel>
+              <FormLabel>Title</FormLabel>
               <FormControl>
                 <Input placeholder="" {...field} />
               </FormControl>
