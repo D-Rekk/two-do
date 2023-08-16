@@ -29,13 +29,14 @@ export async function PUT( req: NextRequest, {params} : Params) {
   await connectMongoDB();
 
   const { note } = params
-  const newNote = await req.json() as NoteSchema
+  const newNote = await req.json()
+  console.log(newNote.value);
 
   try {
     // Find the note by _id and update the entire document
     const updatedNote = await NoteModel.findByIdAndUpdate(
       note,
-      newNote,
+      newNote.value,
       { new: true } // Return the updated document
     );
   
