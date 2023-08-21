@@ -35,7 +35,7 @@ export function CancelNote({ note }: { note: Note }) {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <Button size="icon" className="text-red-500">
+        <Button size="icon" variant="destructive">
           <Trash2 />
         </Button>
       </AlertDialogTrigger>
@@ -46,18 +46,20 @@ export function CancelNote({ note }: { note: Note }) {
             This action cannot be undone. Remove permanently this note?
           </AlertDialogDescription>
           <div>
-            <span className="font-bold">
-            title:
-              </span> {title}
+            <div>
+              <span className="font-bold">
+              title:
+                </span> {title}
             </div>
             <div>
-            <span className="font-bold">
-            description:
+              <span className="font-bold">
+              description:
               </span> {description}
             </div>
-          
-          <div className="text-sm">
-            {_id}
+            
+            <div className="text-sm">
+              {_id}
+            </div>            
           </div>
         </AlertDialogHeader>
         <AlertDialogFooter>

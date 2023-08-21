@@ -30,7 +30,6 @@ export async function PUT( req: NextRequest, {params} : Params) {
 
   const { note } = params
   const newNote = await req.json()
-  console.log(newNote.value);
 
   try {
     // Find the note by _id and update the entire document

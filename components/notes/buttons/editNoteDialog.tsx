@@ -4,7 +4,6 @@ import {
   Dialog,
   DialogContent,
   DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
@@ -46,13 +45,11 @@ export const EditNote: React.FC<Props> = ({
       });
       
       const responseData = await response.json();
-      console.log('PUT request success:', responseData);
       router.refresh();
     } catch (err) {
       console.error('Error sending PUT request:', err);
       throw err;
     }
-    console.log(value);
   }
   return (
     <Dialog>

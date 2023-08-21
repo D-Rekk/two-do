@@ -49,7 +49,6 @@ export const ProfileForm = ({ closeModal }: ProfileFormProps) => {
   const router = useRouter();
   async function onSubmit(values: z.infer<typeof formSchema>) {
     if (closeModal) closeModal();
-    console.log(values)
     try {
       const response = await fetch("http://localhost:3000/api/notes", {
         method: 'POST',
@@ -60,7 +59,6 @@ export const ProfileForm = ({ closeModal }: ProfileFormProps) => {
       });
       
       const responseData = await response.json();
-      console.log('POST request success:', responseData);
       router.refresh();
     } catch (err) {
       console.error('Error sending POST request:', err);

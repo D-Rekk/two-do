@@ -23,7 +23,7 @@ export function NewNote() {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button variant="outline" className="mt-3">New Note</Button>
+        <Button variant="outline" className="mt-3 max-sm:w-full">New Note</Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>

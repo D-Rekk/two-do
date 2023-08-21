@@ -6,14 +6,12 @@ export default function Note({note}: {note: Note}) {
   const { title, description } = note
   return (
     <>
-      <div className="container mt-2 flex justify-between rounded-sm border py-6">
+      <div className="container mt-2 flex flex-col justify-between rounded-sm border py-6 sm:flex-row">
         <div>
           <h1 className="text-lg font-bold">{title}</h1>
           <div>{description}</div>
         </div>
-        <div>
           <Edit note={note}/>
-        </div>
       </div>
     </>
 
