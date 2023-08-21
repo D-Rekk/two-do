@@ -18,11 +18,12 @@ import { useRouter } from "next/navigation"
 
 
 export function CancelNote({ note }: { note: Note }) {
+  const BASE_URL = process.env.NEXT_PUBLIC_VERCEL_URL || 'http://localhost:3000';
   const {title, description, _id } = note;
   const router = useRouter()
   const handleSubmit= () => {
     try{
-      fetch(`http://localhost:3000/api/notes/${_id}`, {
+      fetch(`${BASE_URL}/api/notes/${_id}`, {
         method: "DELETE",
         headers: {'Content-Type': 'application/json'}
       })

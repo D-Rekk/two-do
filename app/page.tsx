@@ -4,7 +4,8 @@ import { Notes } from "./api/notes/route"
 import { RootLayoutProps } from "./layout"
 async function getNotes() {
   try {
-    const res = await fetch('http://localhost:3000/api/notes', {
+    const baseUrl = process.env.NEXT_PUBLIC_VERCEL_URL || 'http://localhost:3000';
+    const res = await fetch(`${baseUrl}/api/notes`, {
       cache: "no-store"});
     if (!res.ok) { throw new Error('Failed to fetch data'); }
     return res.json();
