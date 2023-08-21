@@ -47,10 +47,11 @@ export const ProfileForm = ({ closeModal }: ProfileFormProps) => {
     },
   })
   const router = useRouter();
+  const BASE_URL = process.env.NEXT_PUBLIC_VERCEL_URL || 'http://localhost:3000';
   async function onSubmit(values: z.infer<typeof formSchema>) {
     if (closeModal) closeModal();
     try {
-      const response = await fetch("http://localhost:3000/api/notes", {
+      const response = await fetch(`${BASE_URL}/api/notes`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

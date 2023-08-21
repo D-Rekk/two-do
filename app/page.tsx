@@ -1,7 +1,6 @@
 import { NewNote } from "@/components/notes/buttons/newNoteDialog"
 import Note from "@/components/notes/Note"
 import { Notes } from "./api/notes/route"
-import { RootLayoutProps } from "./layout"
 async function getNotes() {
   try {
     const baseUrl = process.env.NEXT_PUBLIC_VERCEL_URL || 'http://localhost:3000';
@@ -26,6 +25,7 @@ export default async function IndexPage() {
   if (data !== "Error"){
     ({notes} = data)
   }
+
   return (
     <section className="container grid items-center gap-6 pb-8 pt-6 md:py-10">
       <div className="mx-auto flex w-full max-w-[980px] flex-col items-start gap-2">
