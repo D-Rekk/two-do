@@ -1,7 +1,9 @@
+import { Note } from "@/app/api/notes/route"
 import { NoteSchema } from "@/mongoose/models"
 import Edit from "./edit"
 
-export default function Note({ title, description, id }: NoteSchema) {
+export default function Note({note}: {note: Note}) {
+  const { title, description } = note
   return (
     <>
       <div className="container mt-2 flex justify-between rounded-sm border py-6">
@@ -10,7 +12,7 @@ export default function Note({ title, description, id }: NoteSchema) {
           <div>{description}</div>
         </div>
         <div>
-          <Edit title={title} description={description} id={id}/>
+          <Edit note={note}/>
         </div>
       </div>
     </>

@@ -1,14 +1,12 @@
-import { NewNote } from "@/components/notes/newNoteDialog"
+import { NewNote } from "@/components/notes/buttons/newNoteDialog"
 import Note from "@/components/notes/Note"
-import { Button } from "@/components/ui/button"
-import DialogForm from "@/components/notes/dialogForm"
-import Link from "next/link"
 import { Notes } from "./api/notes/route"
 import { RootLayoutProps } from "./layout"
-
+import { useRouter } from "next/navigation"
 async function getNotes() {
   try {
-    const res = await fetch('http://localhost:3000/api/notes');
+    const res = await fetch('http://localhost:3000/api/notes', {
+      cache: "no-store"});
     if (!res.ok) { throw new Error('Failed to fetch data'); }
     return res.json();
   }
@@ -35,8 +33,8 @@ export default async function IndexPage({children} :RootLayoutProps ) {
         <div className="w-full">
         {notes ?
         <>
-          {notes.map(({title, description, _id}) => (
-            <Note key={_id} id={_id} title={title} description={description} />
+          {notes.map((note) => (
+            <Note key={note._id} note={note} />
           ))}
           <NewNote/>
         </>

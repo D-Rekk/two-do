@@ -1,4 +1,5 @@
 "use client"
+import { Note } from "@/app/api/notes/route"
 import {
   AlertDialog,
   AlertDialogAction,
@@ -15,14 +16,13 @@ import { Trash2 } from "lucide-react"
 import { useRouter } from "next/navigation"
 
 
-type Props = {
-  id?: string
-}
-export function CancelNote({id} : Props) {
+
+export function CancelNote({ note }: { note: Note }) {
+  const {title, description, _id } = note;
   const router = useRouter()
   const handleSubmit= () => {
     try{
-      fetch(`http://localhost:3000/api/notes/${id}`, {
+      fetch(`http://localhost:3000/api/notes/${_id}`, {
         method: "DELETE",
         headers: {'Content-Type': 'application/json'}
       })
@@ -43,11 +43,21 @@ export function CancelNote({id} : Props) {
         <AlertDialogHeader>
           <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
           <AlertDialogDescription>
-            This action cannot be undone. This will permanently delete your
-            account and remove your data from our servers.
+            This action cannot be undone. Remove permanently this note?
           </AlertDialogDescription>
           <div>
-            {id}
+            <span className="font-bold">
+            title:
+              </span> {title}
+            </div>
+            <div>
+            <span className="font-bold">
+            description:
+              </span> {description}
+            </div>
+          
+          <div className="text-sm">
+            {_id}
           </div>
         </AlertDialogHeader>
         <AlertDialogFooter>

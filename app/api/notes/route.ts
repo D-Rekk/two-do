@@ -6,6 +6,8 @@ export type Notes = (NoteSchema & {
   _id: string
 })[]
 
+export type Note = Notes[0]
+
 export async function POST(req: Request) {
   const data: NoteSchema  = await req.json()
   const {title, description} = data
