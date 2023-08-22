@@ -3,8 +3,7 @@ import Note from "@/components/notes/Note"
 import { Notes } from "./api/notes/route"
 async function getNotes() {
   try {
-    const baseUrl = process.env.NEXT_PUBLIC_VERCEL_URL || 'http://localhost:3000';
-    const res = await fetch(`${baseUrl}/api/notes`, {
+    const res = await fetch(`/api/notes`, {
       cache: "no-store"});
     if (!res.ok) { throw new Error('Failed to fetch data'); }
     return res.json();
