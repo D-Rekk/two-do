@@ -31,13 +31,12 @@ export const EditNote: React.FC<Props> = ({
   const ref1 = useRef<HTMLInputElement>(null)
   const ref2 = useRef<HTMLInputElement>(null)
   async function handleSubmit(){
-    const BASE_URL = process.env.NEXT_PUBLIC_VERCEL_URL || 'http://localhost:3000';
     const value ={
       title: ref1.current?.value,
       description: ref2.current?.value
     };
     try {
-      const response = await fetch(`${BASE_URL}/api/notes/${id}`, {
+      const response = await fetch(`/api/notes/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
