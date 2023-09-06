@@ -4,7 +4,7 @@ import { headers } from "next/headers"
 import { Notes } from "./api/notes/route"
 async function getNotes(URL: string) {
   try {
-    const res = await fetch(`${URL}/api/notes`, {
+    const res = await fetch(`${URL}api/notes`, {
       cache: "no-store"});
     if (!res.ok) { throw new Error('Failed to fetch data'); }
     return res.json();
