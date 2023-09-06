@@ -1,5 +1,5 @@
 import NoteModel, { NoteSchema } from '../../../mongoose/models';
-import { NextResponse } from "next/server"
+import { NextRequest, NextResponse } from "next/server"
 import connectMongoDB from "@/mongoose/mongodb"
 
 export type Notes = (NoteSchema & {
@@ -8,7 +8,7 @@ export type Notes = (NoteSchema & {
 
 export type Note = Notes[0]
 
-export async function POST(req: Request) {
+export async function POST(req: NextRequest) {
   const data: NoteSchema  = await req.json()
   const {title, description} = data
   await connectMongoDB()
@@ -39,7 +39,7 @@ export async function POST(req: Request) {
   
 }
 
-export async function GET(req: Request) {
+export async function GET(req: NextRequest) {
   await connectMongoDB()
   try {
     const notes: Notes = await NoteModel.find();
