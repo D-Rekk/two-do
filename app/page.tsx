@@ -2,9 +2,10 @@ import { NewNote } from "@/components/notes/buttons/newNoteDialog"
 import Note from "@/components/notes/Note"
 import { headers } from "next/headers"
 import { Notes } from "./api/notes/route"
-async function getNotes(URL: string) {
+async function getNotes() {
+  const URL = process.env.NEXT_BASE_URL;
   try {
-    const res = await fetch(`${URL}api/notes`, {
+    const res = await fetch(`${URL}/api/notes`, {
       cache: "no-store"});
     if (!res.ok) { throw new Error('Failed to fetch data'); }
     return res.json();
@@ -19,8 +20,7 @@ export type T_Notes = {
   notes : Notes
 }
 export default async function IndexPage() {
-  const URL = headers().get("referer");
-  const data: T_Notes |"Error" = await getNotes(URL!)
+  const data: T_Notes |"Error" = await getNotes()
   let notes
   if (data !== "Error"){
     ({notes} = data)

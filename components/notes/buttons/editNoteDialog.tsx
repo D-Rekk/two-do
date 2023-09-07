@@ -44,7 +44,7 @@ export const EditNote: React.FC<Props> = ({
         body: JSON.stringify({value}),
       });
       
-      const responseData = await response.json();
+      // const responseData = await response.json();
       router.refresh();
     } catch (err) {
       console.error('Error sending PUT request:', err);
