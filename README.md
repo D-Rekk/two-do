@@ -1,22 +1,19 @@
-# next-template
+# 2Do
 
-A Next.js 13 template for building apps with Radix UI and Tailwind CSS.
+ A single-page todo app made in Next.js 13. [Live Preview](https://2do-five.vercel.app/).
 
-## Usage
+![2doApp](https://github.com/D-Rekk/two-do/assets/46907875/de4221b3-1e88-472f-bd9f-4f58d44bfaac)
 
-```bash
-npx create-next-app -e https://github.com/shadcn/next-template
-```
-
+---
 ## Features
 
 - Next.js 13 App Directory
+- Shadcn Components
 - Radix UI Primitives
 - Tailwind CSS
+- Zod input validation
 - Icons from [Lucide](https://lucide.dev)
-- Dark mode with `next-themes`
+- System and Dark mode with `next-themes`
 - Tailwind CSS class sorting, merging and linting.
 
-## License
-
-Licensed under the [MIT license](https://github.com/shadcn/ui/blob/main/LICENSE.md).
+___
