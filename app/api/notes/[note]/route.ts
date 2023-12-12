@@ -52,6 +52,7 @@ export async function PUT( req: NextRequest, {params} : Params) {
 }
 
 export async function DELETE( req: NextRequest, {params}:Params ){
+  await connectMongoDB();
   const {note} = params
   try {
     // Find the note by _id and update the entire document
